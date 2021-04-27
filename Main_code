@@ -242,3 +242,4 @@ int main()
     save_png_to_file(&fruit, name);
     return 0;
 }
+
