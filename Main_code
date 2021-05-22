@@ -240,9 +240,7 @@ int main()
     fruit.height = 200;
     char name[] = { "frame###.png" }; // Имя файлов    
     fruit.pixels = calloc(sizeof(pixel_t), fruit.width * fruit.height);
-
-    int u = 9;
-    while (u>1)
+    while (1)
     {
         printf("\nEnter the character\n");
         printf("h - help\n");
