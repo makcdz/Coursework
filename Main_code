@@ -284,9 +284,11 @@ int main()
         name[7] = l % 10 + '0';
         save_png_to_file(&fruit, name);
         if (com == 's')
+        {
             for (int i = 0; i != 20; i++)
                 printf("%i  ", array[i]);
-        printf("\n");
+            printf("\n");
+        }
     }
     clean(fruit);
     name[5] = n / 100 + '0';
