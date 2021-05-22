@@ -1,5 +1,4 @@
 #define _CRT_SECURE_NO_DEPRECATE
-#include <stdio.h>
 #include <png.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -185,6 +184,25 @@ int paint(int **colorarray[4][20], int i, bitmap_t fruit, int j, int x)
     }    
     return 0;
 }
+// Справка
+void help()
+{
+    printf("List of commands:\n");
+    printf("\t h - help\n");
+    printf("\t w - start working\n");
+    printf("\t r - reference about png and array\n");
+    printf("\t f - finish the program\n");
+    printf("\t s - Special working(output of the array after each iteration)\n");
+}
+// Справка о массиве и png файле
+void reference()
+{
+    printf("Array size - 20\n");
+    printf("Initial array - 19, 5, 1, 8, 3, 11, 6, 10, 0, 9, 2, 16, 4, 7, 18, 12, 15, 14, 17, 13\n");
+    printf("Bit map size - 10*200\n");
+    printf("One pixel size - 10*10\n");
+    printf("Sort from top to bottom in ascending order(from 0 to 20)\n");
+}
 // Сортировка вставками
 void InsertionSort(int array[], int l, int** colorarray[4][10], bitmap_t fruit, int x, int n)
 {
@@ -211,19 +229,53 @@ void InsertionSort(int array[], int l, int** colorarray[4][10], bitmap_t fruit, 
 }
 int main()
 {
-    //int tmp;
+    char com;
     int m = 0;
     int n = 20;
     int x = 0;
     int colorarray[4][20];
     int array[20] = {19, 5, 1, 8, 3, 11, 6, 10, 0, 9, 2, 16, 4, 7, 18, 12, 15, 14, 17, 13};
-    int count;
     bitmap_t fruit;
     fruit.width = 10;
     fruit.height = 200;
-    char name[] = { "frame###.png" }; // Имя файлов
-    
+    char name[] = { "frame###.png" }; // Имя файлов    
     fruit.pixels = calloc(sizeof(pixel_t), fruit.width * fruit.height);
+
+    int u = 9;
+    while (u>1)
+    {
+        printf("\nEnter the character\n");
+        printf("h - help\n");
+        scanf("\n%c", &com);
+        while ((getchar()) != '\n');
+        printf("You entered - %c\n", com);
+        switch (com)
+        {
+        case 'h':
+            help();
+            printf("");
+            break;
+        case 's':
+            break;
+        case 'w':
+            break;
+        case 'r':
+            reference();
+            break;
+        case 'f':
+            return 0;
+        default:
+            printf("Command not recognized\n");
+        }
+        if (com == 'w' || com == 's')
+            break;
+    }
+    printf("Initial array");
+    for (int i = 0; i != 20; i++)
+    {
+        printf("%i  ", array[i]);        
+    }
+    printf("\n");
     array_of_color(colorarray, n);
     clean(fruit);
     for (int l = 1; l < n; l++)
@@ -233,13 +285,24 @@ int main()
         name[6] = (l / 10) % 10 + '0';
         name[7] = l % 10 + '0';
         save_png_to_file(&fruit, name);
-
+        if (com == 's')
+            for (int i = 0; i != 20; i++)
+                printf("%i  ", array[i]);
+        printf("\n");
     }
     clean(fruit);
     name[5] = n / 100 + '0';
     name[6] = (n / 10) % 10 + '0';
     name[7] = n % 10 + '0';
     save_png_to_file(&fruit, name);
+    printf("Number of iterations - 20\n");
+    printf("End array\n");
+    for (int i = 0; i != 20; i++)
+    {
+        printf("%i  ", array[i]);
+    }
+    printf("\nThe end");
     return 0;
+    
 }
 
